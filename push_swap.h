@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:21:39 by brturcio          #+#    #+#             */
-/*   Updated: 2025/01/17 18:04:06 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:12:29 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
+#include "../Push_swap/libft/libft.h"
+
 
 typedef struct s_slack
 {
@@ -26,15 +30,19 @@ typedef struct s_slack
 	struct s_stack_node	*prev;
 } t_slack;
 
-void	check_av(char **av, int ac);
 void	printf_error(void);
+void	check_av( char **av);
 
 
-//split
-static size_t	count_words(char const *str, char c);
-static int	ft_free(char **result, size_t index);
-static void	fill_result(char *new, char const *str, char c);
-static int	div_words(char **result, char const *str, char sep);
+// split
+size_t	count_words(char const *str, char c);
+int	ft_free(char **result, size_t index);
+void	fill_result(char *new, char const *str, char c);
+int	div_words(char **result, char const *str, char sep);
 char	**ft_split(char const *s, char c);
 
+
+//a quitar
+char	*ft_strrchr(const char *s, int c);
+size_t	ft_strlen(const char *str);
 #endif

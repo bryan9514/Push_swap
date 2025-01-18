@@ -6,13 +6,13 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:02:22 by brturcio          #+#    #+#             */
-/*   Updated: 2025/01/17 18:19:17 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:51:50 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static size_t	count_words(char const *str, char c)
+size_t	count_words(char const *str, char c)
 {
 	size_t	i;
 	size_t	is_word;
@@ -38,7 +38,7 @@ static size_t	count_words(char const *str, char c)
 	return (counter);
 }
 
-static int	ft_free(char **result, size_t index)
+int	ft_free(char **result, size_t index)
 {
 	size_t	i;
 
@@ -52,7 +52,7 @@ static int	ft_free(char **result, size_t index)
 	return (0);
 }
 
-static void	fill_result(char *new, char const *str, char c)
+void	fill_result(char *new, char const *str, char c)
 {
 	size_t	i;
 
@@ -65,7 +65,7 @@ static void	fill_result(char *new, char const *str, char c)
 	new[i] = '\0';
 }
 
-static int	div_words(char **result, char const *str, char sep)
+int	div_words(char **result, char const *str, char sep)
 {
 	size_t	i;
 	size_t	count;

@@ -6,35 +6,78 @@
 #    By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/17 14:21:58 by brturcio          #+#    #+#              #
-#    Updated: 2025/01/18 08:53:46 by brturcio         ###   ########.fr        #
+#    Updated: 2025/03/09 13:25:38 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES = $(addsuffix .c, main push_swap outils ft_split)
 
-OBJS := $(FILES:%.c=%.o)
+# Variables principales
+NAME        = push_swap
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror
+CPPFLAGS    =  -Iinc -Ilibft -Ift_printf
+RM          = rm -f
 
-NAME = push_swap.a
+# Directorios de librerías
+LIBFT_DIR   = ./libft
+PRINTF_DIR  = ./ft_printf
+LIBFT       = $(LIBFT_DIR)/libft.a
+PRINTF      = $(PRINTF_DIR)/libftprintf.a
 
-CC = cc
+# Flags para enlazar librerías
+LDFLAGS     = -L$(LIBFT_DIR) -L$(PRINTF_DIR)
+LDLIBS      = -lft -lftprintf
 
-CFLAGS = -Wall -Wextra -Werror
+# Archivos fuente
+SRC_DIR     = src
+# SRC         = $(wildcard $(SRC_DIR)/*.c)
+SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
+OBJ         = $(SRC:.c=.o)
 
-RM = rm -f
+# Regla principal
+all: $(LIBFT) $(PRINTF) $(NAME)
 
-all : $(NAME)
+# Compilar el ejecutable
+$(NAME): $(OBJ) $(LIBFT) $(PRINTF)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIBS)
+	@echo "✅ Compilación completada: $(NAME)"
 
-%.o:%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Compilar libft
+$(LIBFT):
+	@$(MAKE) -s -C $(LIBFT_DIR)
 
-$(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+# Compilar ft_printf
+$(PRINTF):
+	@$(MAKE) -s -C $(PRINTF_DIR)
 
-clean :
-	$(RM) $(OBJS)
+# Generar los archivos .o
+%.o: %.c
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-fclean : clean
-	$(RM) $(NAME)
-re : fclean all
+# Limpiar archivos intermedios
+clean:
+	@$(RM) $(OBJ)
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(PRINTF_DIR) clean
+	@echo "🧹 Archivos intermedios eliminados."
 
-.PHONY : all clean fclean re 
+# Limpiar todo
+fclean: clean
+	@$(RM) $(NAME)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(PRINTF_DIR) fclean
+	@echo "🧹 Proyecto limpio."
+
+# # Reglas PHONY
+.PHONY : all clean fclean re debug
+
+# Reconstruir todo
+re: fclean all
+
+
+# -------------------- DEPURACIÓN --------------------
+debug: CFLAGS += -g
+debug: re
+	@echo "Compilado con -g para depuración."
+
+

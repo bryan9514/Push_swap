@@ -1,51 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   outils.c                                           :+:      :+:    :+:   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 08:47:24 by brturcio          #+#    #+#             */
-/*   Updated: 2025/01/18 14:06:27 by brturcio         ###   ########.fr       */
+/*   Created: 2025/02/26 16:19:44 by brturcio          #+#    #+#             */
+/*   Updated: 2025/03/09 18:55:53 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "push_swap.h"
 
-void	check_av( char **av)
+void	ft_push(t_stack **dest, t_stack **src)
 {
-	int	i;
+	t_stack	*temp;
 
-	i = 0;
-	// while (i < ac - 1)
-	// {
-	// 	printf("[%d][%d] %s\n",i ,av[i]);
-	// 	i++;
-	// }
-
-	while (av[i] != NULL)
-	{
-		printf("[%d] %s\n",i, av[i]);
-		i++;
-	}
-
-
-}
-void	printf_error(void)
-{
-	printf("Error\n");
+	if (!*src)
+		return ;
+	temp = *src;
+	*src = (*src)->next;
+	temp->next = *dest;
+	*dest = temp;
 }
 
+void	ft_pa(t_stack **a_stack, t_stack **b_stack)
+{
+	ft_push(a_stack, b_stack);
+	ft_printf("pa\n");
+}
 
-// void free_split(char **split) {
-//     int i = 0;
-//     while (split[i] != NULL) {
-//         free(split[i]);
-
-//         i++;
-//     }
-//     free(split);
-// }
-
+void	ft_pb(t_stack **a_stack, t_stack **b_stack)
+{
+	ft_push(b_stack, a_stack);
+	ft_printf("pb\n");
+}

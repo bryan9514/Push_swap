@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:21:39 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/09 19:05:36 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:54:19 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+#include <stdbool.h>
+
 typedef struct s_stack
 {
-	int		value;
+	int	value;
+	int	index;
 	struct s_stack	*next;
 
 } t_stack;
@@ -49,7 +52,7 @@ int	push_node(t_stack **stack, int value);
 
 
 //is_sorting
-int	is_sorted(t_stack *stack);
+int	check_list_order(t_stack *stack);
 int	size_stack(t_stack *stack);
 
 //free
@@ -61,10 +64,26 @@ void	free_stack_error(t_stack **stack);
 //sortin
 void	sort_two(t_stack **a_stack);
 void	sort_three(t_stack **a_stack);
+void	sort_four(t_stack **a_stack, t_stack **b_stack);
 void	sort_five(t_stack **a_stack, t_stack **b_stack);
-t_stack *find_min(t_stack_node *a); //BORRAR
-void	min_on_top(t_stack **a) //BORRAR
-int get_position(t_stack *a, t_stack *node);
+
+
+t_stack	*find_min(t_stack *stack); //BORRAR
+int	get_position(t_stack *stack, t_stack *target); //BORRAR
+void	min_on_top(t_stack **a_stack);
+
+// Algoritmo Turk Sort
+void turk_sort(t_stack **a_stack, t_stack **b_stack);
+void chunk_to_b(t_stack **a_stack, t_stack **b_stack, int chunk_size);
+void move_chunks_to_a(t_stack **a_stack, t_stack **b_stack);
+t_stack *find_max(t_stack *stack);
+void assign_index(t_stack *stack);
+t_stack *find_min_unindexed(t_stack *stack);
+void assign_index(t_stack *stack);
+
+
+
+
 
 //swap
 void	ft_swap(t_stack **stack);

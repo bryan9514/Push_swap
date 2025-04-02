@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 12:53:22 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/09 19:13:10 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:38:54 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	validate_and_parse_args(int ac, char **av, t_stack **a_stack)
 			free_args(args);
 		exit (1);
 	}
-	*a_stack = init_stack(args);`
+	*a_stack = init_stack(args);
 	if (ac == 2)
 		free_args(args);
 }
@@ -70,9 +70,8 @@ int	main(int ac, char **av)
 
 	validate_and_parse_args(ac, av, &a_stack);
 	choose_sorting_algo(&a_stack, &b_stack);
-	print_stack(a_stack);
+	//print_stack(a_stack);
 	free_stack(&a_stack);
-	free_stack(&b_stack);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/17 14:21:58 by brturcio          #+#    #+#              #
-#    Updated: 2025/03/09 13:25:38 by brturcio         ###   ########.fr        #
+#    Updated: 2025/03/22 13:36:14 by brturcio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,12 @@
 NAME        = push_swap
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
-CPPFLAGS    =  -Iinc -Ilibft -Ift_printf
+CPPFLAGS    = -Iinc -Ilibft -Ift_printf
 RM          = rm -f
 
-# Directorios de librerías
+# Directorios
+OBJ_DIR     = obj
+SRC_DIR     = src
 LIBFT_DIR   = ./libft
 PRINTF_DIR  = ./ft_printf
 LIBFT       = $(LIBFT_DIR)/libft.a
@@ -28,11 +30,9 @@ PRINTF      = $(PRINTF_DIR)/libftprintf.a
 LDFLAGS     = -L$(LIBFT_DIR) -L$(PRINTF_DIR)
 LDLIBS      = -lft -lftprintf
 
-# Archivos fuente
-SRC_DIR     = src
-# SRC         = $(wildcard $(SRC_DIR)/*.c)
-SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJ         = $(SRC:.c=.o)
+# Archivos fuente y objetos
+SRC         = $(shell find $(SRC_DIR) -type f -name "*.c")
+OBJ         = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # Regla principal
 all: $(LIBFT) $(PRINTF) $(NAME)
@@ -50,13 +50,17 @@ $(LIBFT):
 $(PRINTF):
 	@$(MAKE) -s -C $(PRINTF_DIR)
 
-# Generar los archivos .o
-%.o: %.c
+# Crear el directorio de objetos si no existe
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+# Generar los archivos .o en obj/
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Limpiar archivos intermedios
 clean:
-	@$(RM) $(OBJ)
+	@$(RM) -r $(OBJ_DIR)
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
 	@$(MAKE) -s -C $(PRINTF_DIR) clean
 	@echo "🧹 Archivos intermedios eliminados."
@@ -68,12 +72,11 @@ fclean: clean
 	@$(MAKE) -s -C $(PRINTF_DIR) fclean
 	@echo "🧹 Proyecto limpio."
 
-# # Reglas PHONY
+# Reglas PHONY
 .PHONY : all clean fclean re debug
 
 # Reconstruir todo
 re: fclean all
-
 
 # -------------------- DEPURACIÓN --------------------
 debug: CFLAGS += -g

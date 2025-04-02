@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 21:45:06 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/02 15:03:40 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:33:53 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_args(char **args)
 	int	i;
 
 	if (!args)
-		return;
+		return ;
 	i = 0;
 	while (args[i])
 	{
@@ -48,5 +48,5 @@ void	free_stack_error(t_stack **stack)
 		free(*stack);
 		*stack = tmp;
 	}
-	write (1,"Error\n", 6);
+	write(1, "Error\n", 6);
 }

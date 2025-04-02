@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:56:09 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/08 19:24:07 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:21:51 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ t_stack	*init_stack(char **args)
 	return (stack);
 }
 
-
 int	push_node(t_stack **stack, int value)
 {
-	t_stack *new_node;
+	t_stack	*new_node;
 	t_stack	*last_node;
 
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
-		return(0);
-	new_node->value = value; //asignamos el numero al nodo
-	new_node->next = NULL; //apuntamos el next a null
+		return (0);
+	new_node->value = value; // asignamos el numero al nodo
+	new_node->index = -1;
+	new_node->next = NULL;   // apuntamos el next a null
 	if (!*stack)
 		*stack = new_node;
 	else
@@ -54,3 +54,5 @@ int	push_node(t_stack **stack, int value)
 	}
 	return (1);
 }
+
+

@@ -6,11 +6,10 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 20:41:35 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/09 18:13:31 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:04:00 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//(Verificación de argumentos)
 #include "push_swap.h"
 
 int	check_duplicate(char **args, char *num, int index)

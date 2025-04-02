@@ -6,7 +6,7 @@
 /*   By: brturcio <brturcio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:21:39 by brturcio          #+#    #+#             */
-/*   Updated: 2025/03/13 17:54:19 by brturcio         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:52:03 by brturcio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	get_position(t_stack *stack, t_stack *target); //BORRAR
 void	min_on_top(t_stack **a_stack);
 
 // Algoritmo Turk Sort
-void turk_sort(t_stack **a_stack, t_stack **b_stack);
+void chuck_sort(t_stack **a_stack, t_stack **b_stack);
 void chunk_to_b(t_stack **a_stack, t_stack **b_stack, int chunk_size);
 void move_chunks_to_a(t_stack **a_stack, t_stack **b_stack);
 t_stack *find_max(t_stack *stack);
